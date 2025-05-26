@@ -41,7 +41,8 @@ export async function generateMetadata(
   if (activity) description += ` • ${activity.name}`;
   if (spotify) description += ` • Listening to ${spotify.song} by ${spotify.artist}`;
 
-  const avatarUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp?size=256`;
+  // Use PNG format for Discord avatar
+  const avatarUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256`;
   const baseUrl = 'https://next-lanyard.phatlor.me';
 
   return {
@@ -50,26 +51,30 @@ export async function generateMetadata(
     openGraph: {
       title: displayName,
       description,
+      siteName: 'Next Lanyard',
+      type: 'website',
       images: [
-        {
-          url: avatarUrl,
-          width: 256,
-          height: 256,
-          alt: `${displayName}'s Discord avatar`
-        },
         {
           url: `${baseUrl}/lookup/${id}/opengraph-image`,
           width: 1200,
           height: 630,
-          alt: `${displayName}'s Discord presence`
-        }
+          alt: `${displayName}'s Discord presence`,
+          type: 'image/png',
+        },
+        {
+          url: avatarUrl,
+          width: 256,
+          height: 256,
+          alt: `${displayName}'s Discord avatar`,
+          type: 'image/png',
+        },
       ],
     },
     twitter: {
       card: 'summary_large_image',
       title: displayName,
       description,
-      images: [avatarUrl, `${baseUrl}/lookup/${id}/opengraph-image`],
+      images: [`${baseUrl}/lookup/${id}/opengraph-image`],
     },
   };
 }
