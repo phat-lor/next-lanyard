@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import { Metadata, ResolvingMetadata } from 'next';
 
 async function fetchUserData(userId: string) {
   try {
@@ -13,8 +13,15 @@ async function fetchUserData(userId: string) {
   }
 }
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const data = await fetchUserData(params.id);
+export async function generateMetadata(
+  { params }: { params: Promise<{ id: string }> },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // Await the params Promise
+  const { id } = await params;
+  
+  const data = await fetchUserData(id);
   const user = data?.data?.discord_user;
 
   if (!user) {
@@ -50,7 +57,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
           alt: `${displayName}'s Discord avatar`
         },
         {
-          url: `/lookup/${params.id}/opengraph-image`,
+          url: `/lookup/${id}/opengraph-image`,
           width: 1200,
           height: 630,
           alt: `${displayName}'s Discord presence`
@@ -61,15 +68,15 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
       card: 'summary_large_image',
       title: displayName,
       description,
-      images: [avatarUrl, `/lookup/${params.id}/opengraph-image`],
+      images: [avatarUrl, `/lookup/${id}/opengraph-image`],
     },
   };
 }
 
-export default function LookupLayout({
+export default function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return children;
-} 
+}
