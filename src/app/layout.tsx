@@ -5,6 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://next-lanyard.phatlor.me'),
   title: "Next.js Lanyard Integration",
   description: "An example of integrating Discord's presence using Lanyard and Next.js",
   keywords: ["nextjs", "lanyard", "discord", "presence", "real-time", "websocket", "api"],
