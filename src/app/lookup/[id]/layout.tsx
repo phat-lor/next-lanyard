@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 
   if (!user) {
     return {
-      title: 'User Not Found - Next.js Lanyard Integration',
+      title: 'User Not Found',
       description: 'This Discord user could not be found or is not being monitored by Lanyard.',
     };
   }
@@ -37,24 +37,39 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   const avatarUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256`;
 
   return {
-    title: `${displayName}'s Discord Presence - Next.js Lanyard`,
+    title: displayName,
     description,
     openGraph: {
-      title: `${displayName}'s Discord Presence`,
+      title: displayName,
       description,
       images: [
-        avatarUrl,
-        `/lookup/${params.id}/opengraph-image`
+        {
+          url: avatarUrl,
+          width: 256,
+          height: 256,
+          alt: `${displayName}'s Discord avatar`
+        },
+        {
+          url: `/lookup/${params.id}/opengraph-image`,
+          width: 1200,
+          height: 630,
+          alt: `${displayName}'s Discord presence`
+        }
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${displayName}'s Discord Presence`,
+      title: displayName,
       description,
-      images: [
-        avatarUrl,
-        `/lookup/${params.id}/opengraph-image`
-      ],
+      images: [avatarUrl, `/lookup/${params.id}/opengraph-image`],
     },
   };
+}
+
+export default function LookupLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return children;
 } 

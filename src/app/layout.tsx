@@ -5,15 +5,22 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://next-lanyard.phatlor.me'),
-  title: "Next.js Lanyard Integration",
+  metadataBase: new URL("https://next-lanyard.phatlor.me"),
+  title: {
+    template: "%s - Next.js Lanyard Integration",
+    default: "Next.js Lanyard Integration"
+  },
   description: "An example of integrating Discord's presence using Lanyard and Next.js",
   keywords: ["nextjs", "lanyard", "discord", "presence", "real-time", "websocket", "api"],
   authors: [{ name: "Phat Lorthammakun" }],
   openGraph: {
-    title: "Next.js Lanyard Integration",
+    title: {
+      template: "%s - Next.js Lanyard Integration",
+      default: "Next.js Lanyard Integration"
+    },
     description: "An example of integrating Discord's presence using Lanyard and Next.js",
     type: "website",
+    siteName: "Next.js Lanyard Integration",
     images: [{
       url: "/favicon.ico",
       width: 1200,
@@ -23,7 +30,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Next.js Lanyard Integration",
+    title: {
+      template: "%s - Next.js Lanyard Integration",
+      default: "Next.js Lanyard Integration"
+    },
     description: "An example of integrating Discord's presence using Lanyard and Next.js",
     images: ["/favicon.ico"],
   },
