@@ -16,3 +16,6 @@ See [src/components/DiscordPresence.tsx](src/components/DiscordPresence.tsx) for
 
 ### Hook Implementation
 The main Lanyard hook is in [src/hooks/useLanyard.ts](src/hooks/useLanyard.ts) - handles both WebSocket and REST API connections.
+
+## Screenshot
+![image](https://github.com/user-attachments/assets/a4b7d97b-2f1e-43fb-a3af-08da4a13387d)
